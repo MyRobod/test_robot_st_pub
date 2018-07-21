@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="leelawadee_robot" 
+    xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <link name="base_link"/>
+
+    <joint name="link_1_joint" type="revolute">
+        <axis xyz="0 0 1" />
+        <origin xyz="0 0 0.4" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="link_1"/>
+        <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="3"/>
+        <dynamics damping="0.1" friction="0.0"/>
+    </joint>
+
+    <link name="link_1"/>
+
+    <joint name="link_2_joint" type="revolute">
+        <axis xyz="0 1 0" />
+        <origin xyz="0 0 1" rpy="0 0 0"/>
+        <parent link="link_1"/>
+        <child link="link_2"/>
+        <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="3"/>
+        <dynamics damping="0.1" friction="0.0"/>
+    </joint>
+
+    <link name="link_2"/>
+
+    <joint name="link_3_joint" type="revolute">
+        <axis xyz="0 1 0" />
+        <origin xyz="0 0 1" rpy="0 0 0"/>
+        <parent link="link_2"/>
+        <child link="link_3"/>
+        <limit effort="1000" lower="-3.14159" upper="3.14159" velocity="3"/>
+        <dynamics damping="0.1" friction="0.0"/>
+    </joint>
+
+    <link name="link_3"/>
+
+    <joint name="endeffector_link" type="fixed">
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <parent link="link_3"/>
+        <child link="endeffector_link"/>
+    </joint>
+
+    <link name="endeffector_link"/>
+</robot>

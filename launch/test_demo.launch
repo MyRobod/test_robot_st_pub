@@ -1,0 +1,22 @@
+<launch>
+    <!-- Load the URDF/Xacro model -->
+    <arg name="urdf_file" default="$(find xacro)/xacro '$(find test_robot_st_pub)/urdf/robot.xacro'"/>
+    <param name="robot_description" command="$(arg urdf_file)"/>
+
+    <!-- Publish the robot state -->
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
+        <!-- <param name="tf_prefix" value="myBot"/> -->
+        <param name="publish_frequency" value="20"/>
+         <!-- <param name="ignore_timestamp" value="true"/> -->
+        <param name="use_tf_static" value="false"/>
+    </node>
+
+    <!-- send fake joint values -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="true"/>
+    </node>
+
+
+    <!-- Show in Rviz   -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find test_robot_st_pub)/cfg/robot_view.rviz"/>
+</launch>
